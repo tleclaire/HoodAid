@@ -45,7 +45,7 @@ namespace HoodAid
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyMethod());
+                app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader());
             }
             else
             {
