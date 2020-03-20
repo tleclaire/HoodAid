@@ -3,14 +3,16 @@ using System;
 using HoodAid.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HoodAid.Migrations
 {
     [DbContext(typeof(HoodAidContext))]
-    partial class HoodAidContextModelSnapshot : ModelSnapshot
+    [Migration("20200320211312_hoodaid")]
+    partial class hoodaid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

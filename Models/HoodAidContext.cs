@@ -18,6 +18,13 @@ namespace HoodAid.Models
         
 
         public DbSet<User> Users { get; set; }
+        public DbSet<ContactPerson> ContactPersons { get; set; }
+        public DbSet<DiaryEntry> DiaryEntries { get; set; }
+        public DbSet<HealthAuthority> HealthAuthorities { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Symptom> Symptoms { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
