@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using HoodAid.Models;
+using HoodAid.Code;
 
 namespace HoodAid
 {
@@ -36,7 +37,7 @@ namespace HoodAid
         {
             services.AddCors();
             services.AddDbContext<HoodAidContext>(options => options.UseSqlite("Data Source=Data\\hoodaid.db"));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,11 +46,15 @@ namespace HoodAid
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                app.UseErrorLogging();
                 app.UseCors(options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader());
             }
             else
             {
                 app.UseHttpsRedirection();
+                app.UseDeveloperExceptionPage();
+                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
 
             app.UseDefaultFiles();
