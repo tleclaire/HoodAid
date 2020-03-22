@@ -15,7 +15,14 @@ namespace HoodAid.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Time = table.Column<DateTime>(nullable: false),
                     Activity = table.Column<string>(nullable: true),
-                    Temperature = table.Column<decimal>(nullable: false)
+                    Temperature = table.Column<decimal>(nullable: false),
+                    Husten = table.Column<int>(nullable: false),
+                    Kurzatmigkeit = table.Column<bool>(nullable: false),
+                    Atemnot = table.Column<bool>(nullable: false),
+                    Gliederschmerzen = table.Column<bool>(nullable: false),
+                    Durchfall = table.Column<bool>(nullable: false),
+                    GeruchssinnVerlust = table.Column<bool>(nullable: false),
+                    Muedigkeit = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,6 +44,20 @@ namespace HoodAid.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Symptoms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Value = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Symptoms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -53,27 +74,6 @@ namespace HoodAid.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Symptoms",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Value = table.Column<int>(nullable: false),
-                    DiaryEntryId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Symptoms", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Symptoms_DiaryEntries_DiaryEntryId",
-                        column: x => x.DiaryEntryId,
-                        principalTable: "DiaryEntries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,11 +126,6 @@ namespace HoodAid.Migrations
                 name: "IX_Persons_HealthAuthorityId",
                 table: "Persons",
                 column: "HealthAuthorityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Symptoms_DiaryEntryId",
-                table: "Symptoms",
-                column: "DiaryEntryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -145,10 +140,10 @@ namespace HoodAid.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "HealthAuthorities");
+                name: "DiaryEntries");
 
             migrationBuilder.DropTable(
-                name: "DiaryEntries");
+                name: "HealthAuthorities");
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoodAid.Migrations
 {
     [DbContext(typeof(HoodAidContext))]
-    [Migration("20200320211312_hoodaid")]
+    [Migration("20200322114119_hoodaid")]
     partial class hoodaid
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,27 @@ namespace HoodAid.Migrations
 
                     b.Property<string>("Activity")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("Atemnot")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Durchfall")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("GeruchssinnVerlust")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Gliederschmerzen")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Husten")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Kurzatmigkeit")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Muedigkeit")
+                        .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Temperature")
                         .HasColumnType("TEXT");
@@ -102,9 +123,6 @@ namespace HoodAid.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("DiaryEntryId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -112,8 +130,6 @@ namespace HoodAid.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DiaryEntryId");
 
                     b.ToTable("Symptoms");
                 });
@@ -186,13 +202,6 @@ namespace HoodAid.Migrations
                     b.HasIndex("HealthAuthorityId");
 
                     b.HasDiscriminator().HasValue("Patient");
-                });
-
-            modelBuilder.Entity("HoodAid.Models.Symptom", b =>
-                {
-                    b.HasOne("HoodAid.Models.DiaryEntry", null)
-                        .WithMany("Symptoms")
-                        .HasForeignKey("DiaryEntryId");
                 });
 
             modelBuilder.Entity("HoodAid.Models.ContactPerson", b =>

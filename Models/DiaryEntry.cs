@@ -63,18 +63,13 @@ namespace HoodAid.Models
             }
         }
 
-        //public List<Symptom> Symptoms { get; set; }
-
-        private List<Symptom> symptoms;
-
-        public List<Symptom> Symptoms
-        {
-            get { return symptoms; }
-            set 
-            { 
-                symptoms = value; 
-            }
-        }
+        public bool Husten { get; set; }
+        public bool Kurzatmigkeit { get; set; }
+        public bool Atemnot { get; set; }
+        public bool Gliederschmerzen { get; set; }
+        public bool Durchfall { get; set; }
+        public bool GeruchssinnVerlust { get; set; }
+        public bool Muedigkeit { get; set; }
 
         public List<ContactPerson> Contacts { get; set; }
 
